@@ -1,0 +1,26 @@
+class ModelBasedReflexAgent:
+    def __init__(self):
+        self.state = None
+        self.model = {}
+        self.rules = {
+            "Dirty": "Suck",
+            "Clean": "Move"
+        }
+        self.action = None
+    def update_state(self, percept):
+        self.state = percept
+    def rule_match(self):
+        if self.state in self.rules:
+            return self.rules[self.state]
+        return "No Action"
+    def agent(self, percept):
+        self.update_state(percept)
+        self.action = self.rule_match()
+        return self.action
+agent = ModelBasedReflexAgent()
+percepts = ["Dirty", "Clean", "Dirty", "Clean"]
+for percept in percepts:
+    action = agent.agent(percept)
+    print("Percept:", percept)
+    print("State  :", agent.state)
+    print("Action :", action)                                 
